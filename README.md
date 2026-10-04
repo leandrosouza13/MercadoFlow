@@ -23,23 +23,23 @@ Protótipo local para receber compras, manter um catálogo único e acompanhar a
 - Atualização do custo e entrada no estoque sem alterar automaticamente o preço de venda
 - Histórico de compra, variação do custo e comparativo por fornecedor
 - Indicadores de custo atual, anterior, menor, maior e médio ponderado no catálogo
-- Registro local de alterações de custo e preço de venda
+- Registro de alterações de custo e preço de venda
 - Link por produto para consultar gráficos de evolução de preço e estoque, além das movimentações detalhadas
 - Busca e paginação nas listas extensas de produtos, precificação, abastecimento e estoque central; históricos detalhados de produto também são paginados
 - Importação de produtos por CSV
 - Importação de planograma em Excel/CSV, com prévia, seleção dos campos e correspondência por ID, SKU/EAN ou nome exato
-- Persistência local com `localStorage`
+- Cópia local com `localStorage` e sincronização do workspace pelo Supabase
 - Módulos de preço e estoque mantidos como recursos secundários
 
 ## Lojas e estoque central
 
 1. Abra **Lojas** para cadastrar uma unidade. O catálogo de produtos é compartilhado; cada unidade passa a ter seus próprios saldos, custos e preços.
-2. Use o seletor **Unidade** no cabeçalho para mudar o contexto de operação. Vendas, cadastro/edição, abastecimento e históricos ficam associados ao local selecionado.
+2. Use o seletor **Unidade** no cabeçalho para mudar o contexto de operação. Recebimentos, cadastro/edição, abastecimento e históricos ficam associados ao local selecionado.
 3. No dashboard, escolha **Esta unidade** ou **Consolidado**. A visão consolidada soma os indicadores, mas mostra os saldos de cada loja e do estoque central separadamente.
 4. Em **Receber compra**, escolha se a nota deve abastecer uma loja ou o **Estoque central**.
 5. Em **Estoque central**, escolha produto, quantidade e loja de destino. A transferência reduz o central e aumenta somente o saldo da loja escolhida; não altera os custos nem os preços locais.
 
-As lojas não são excluídas para preservar compras e transferências históricas. O estoque central é um local reservado para distribuição. O registro de vendas e as rotinas de caixa ficam fora do escopo porque já são atendidos pelo sistema de gestão/POS do mercadinho.
+Lojas adicionais podem ser excluídas em **Lojas**; isso remove os registros e o estoque daquele local, mas preserva o catálogo compartilhado. A loja principal e o estoque central são fixos. O registro de vendas e as rotinas de caixa ficam fora do escopo porque já são atendidos pelo sistema de gestão/POS do mercadinho.
 
 ## Organização das telas
 
@@ -107,7 +107,7 @@ Os campos podem ser selecionados individualmente na prévia. A quantidade atual 
 
 Na tela **Produtos**, abra **Ver evolução de preço e estoque** no produto desejado para consultar gráficos e tabelas de movimentações sem aumentar a lista principal. Os gráficos mostram os últimos 40 pontos; as tabelas detalhadas ficam recolhidas e podem ser abertas na mesma janela. Novas entradas de preço identificam valor anterior/novo, custo, margem estimada, origem e operador local. Alterações manuais, recomendações, importações e preço inicial são registradas.
 
-O histórico de estoque registra edições, compras, importações e transferências. Registros antigos de movimentações de venda, criados antes de sua remoção do app, podem continuar visíveis no histórico local para preservar dados existentes. Como os dados são locais, alterações anteriores que não deixaram uma trilha de auditoria não podem ser reconstruídas com precisão; nesses casos, o gráfico começa quando os registros estão disponíveis.
+O histórico de estoque registra edições, compras, importações e transferências no workspace. Movimentações antigas de venda, criadas antes da remoção desse módulo, podem permanecer nos dados históricos para preservar registros existentes. Alterações passadas que não deixaram uma trilha de auditoria não podem ser reconstruídas; nesses casos, os gráficos começam no primeiro registro disponível.
 
 ## Limitações desta versão
 
