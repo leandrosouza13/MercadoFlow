@@ -15,6 +15,18 @@ O esquema cloud cria um espaço de trabalho por empresa, membership, um estado J
 5. Decida se a confirmação de e-mail ficará habilitada. Se ficar, o usuário precisará confirmar o endereço antes de entrar.
 6. Depois do primeiro deploy, abra o endereço publicado, crie a conta, confirme o e-mail se solicitado e crie o workspace. É possível escolher migrar os dados salvos neste navegador.
 
+## Login com Google
+
+O app oferece **Continuar com Google** na tela de acesso. Para habilitar o provedor:
+
+1. No Google Cloud Console, crie ou selecione um projeto e configure a tela de consentimento OAuth. Se o app estiver em modo de teste, adicione como testadores as contas Google que poderão entrar.
+2. Crie um **OAuth client ID** do tipo **Web application**. Em **Authorized redirect URIs**, cadastre exatamente a URL de callback exibida no Supabase em **Authentication → Providers → Google**. Para este projeto, o callback é `https://yhrfwwxxfpmygdvzfwzx.supabase.co/auth/v1/callback`.
+3. Copie o **Client ID** e o **Client Secret** para os campos do provedor Google no Dashboard do Supabase e habilite o provedor.
+4. Mantenha `https://leandrosouza13.github.io/MercadoFlow/` na lista **Authentication → URL Configuration → Redirect URLs**. Esse é o endereço para o qual o Supabase retorna após autenticar pelo Google.
+5. Salve as configurações e teste **Continuar com Google** no site publicado.
+
+O Client Secret pertence somente às configurações do provedor no Supabase: nunca o coloque em `supabase-config.js`, no frontend ou no GitHub. Usuários em modo de teste precisam estar autorizados na tela de consentimento do Google.
+
 O cliente do app usa a URL e a chave `anon`/publishable em [`../supabase-config.js`](../supabase-config.js). A chave pública é esperada no frontend: RLS e as funções do banco continuam obrigatórias para proteger os dados. **Nunca coloque `service_role`, chaves secretas, senha do banco ou tokens em arquivos do frontend.**
 
 ## Publicação no GitHub Pages

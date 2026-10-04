@@ -195,6 +195,25 @@ document.getElementById("location-switcher").addEventListener("change",event=>{
   setActiveLocation(event.target.value);
 });
 document.getElementById("quick-product").onclick=()=>openProductModal();
+document.getElementById("auth-google").addEventListener("click",async event=>{
+  const button=event.currentTarget;
+  if(!supabaseClient){
+    setAuthMessage("A integração Supabase não está configurada corretamente.",true);
+    return;
+  }
+  button.disabled=true;
+  setAuthMessage("Redirecionando para o Google...");
+  try{
+    const {error}=await supabaseClient.auth.signInWithOAuth({
+      provider:"google",
+      options:{redirectTo:window.location.href.split("#")[0]}
+    });
+    if(error) throw error;
+  }catch(error){
+    setAuthMessage(error instanceof Error?error.message:"Não foi possível entrar com o Google.",true);
+    button.disabled=false;
+  }
+});
 document.getElementById("auth-toggle-mode").addEventListener("click",()=>{
   authMode=authMode==="login"?"signup":"login";
   document.getElementById("auth-heading").textContent=authMode==="login"?"Acesse sua conta":"Crie sua conta";

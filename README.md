@@ -1,6 +1,6 @@
 # MercadoFlow — Recebimento inteligente para mercadinhos
 
-Protótipo local para receber compras, manter um catálogo único e acompanhar a evolução do custo por produto e fornecedor. O fluxo principal é importar uma nota fiscal, revisar as correspondências e só então registrar a compra.
+Aplicativo web para receber compras, manter um catálogo único e acompanhar a evolução do custo por produto e fornecedor. O fluxo principal é importar uma nota fiscal, revisar as correspondências e só então registrar a compra.
 
 ## O que funciona nesta versão
 
@@ -8,6 +8,7 @@ Protótipo local para receber compras, manter um catálogo único e acompanhar a
 - Detalhes de estoque por unidade e compras recentes recolhidos para manter o resumo principal compacto
 - Cadastro e troca de lojas com catálogo compartilhado e estoque, custo e preço separados por local
 - Dashboard individual ou consolidado, com saldos identificados por loja e estoque central
+- Acesso por e-mail/senha e opção de login Google após configurar o provedor OAuth no Supabase
 - Recebimento de compras direcionado a uma loja ou ao estoque central
 - Transferência do estoque central para as lojas, com validação de saldo e histórico
 - Análise e atualização do planograma em **Receber compra**, com prévia e seleção de campos
@@ -118,6 +119,8 @@ O app usa autenticação Supabase e sincroniza o estado da empresa na nuvem. O `
 O app está integrado ao Supabase para autenticação, sincronização do estado do workspace com controle de revisão e armazenamento privado de novos documentos. A configuração pública está em [`supabase-config.js`](./supabase-config.js); a chave `anon`/publishable pode ser pública, desde que RLS esteja ativa. Nunca exponha `service_role`.
 
 Antes de usar, execute [`supabase/cloud-schema.sql`](./supabase/cloud-schema.sql) no SQL Editor e configure as URLs de autenticação. O arquivo [`supabase/schema.sql`](./supabase/schema.sql) é um esquema legado de referência e não deve ser executado para esta integração. Veja o [guia de configuração](./supabase/README.md).
+
+O login Google também requer configurar um OAuth Client ID e Client Secret no Google Cloud e habilitar o provedor em **Supabase → Authentication → Providers → Google**. Siga [as instruções de configuração](./supabase/README.md#login-com-google); o Client Secret deve ficar somente no Dashboard do Supabase.
 
 O estado é salvo como JSON por workspace, limitado a 10 MB; esse desenho permite sincronizar o protótipo, mas não é um modelo relacional otimizado para escala ou colaboração simultânea intensa. Conflitos de revisão são rejeitados para evitar sobrescrita silenciosa. O app pode ser publicado pelo [workflow GitHub Pages](./.github/workflows/deploy-mercadoflow.yml); habilite GitHub Actions como fonte em **Settings → Pages**.
 
