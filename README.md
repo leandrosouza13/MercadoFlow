@@ -81,7 +81,7 @@ Não precisa instalar dependências. Para usar a versão conectada, o projeto de
 
 1. Execute [`supabase/cloud-schema.sql`](./supabase/cloud-schema.sql) no SQL Editor e configure as URLs de autenticação conforme o [guia do Supabase](./supabase/README.md).
 2. Em desenvolvimento, abra a pasta no VS Code e inicie um servidor local pela extensão **Live Server**; depois acesse o endereço HTTP gerado e entre ou crie uma conta.
-3. Para publicar, habilite GitHub Actions em **Settings → Pages** e envie as alterações para `main`; o workflow publica o app e informa o endereço em **Actions**.
+3. Para publicar, habilite GitHub Actions em **Settings → Pages** e envie as alterações para `main`; o workflow publica o app em [`https://leandrosouza13.github.io/MercadoFlow/`](https://leandrosouza13.github.io/MercadoFlow/). O primeiro deploy precisa concluir com sucesso.
 4. Para OCR de PDF/foto e outros recursos carregados sob demanda, é necessária conexão à internet.
 
 

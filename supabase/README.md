@@ -11,7 +11,7 @@ O esquema cloud cria um espaço de trabalho por empresa, membership, um estado J
 1. No Dashboard, abra o projeto e vá para **SQL Editor → New query**.
 2. Abra `cloud-schema.sql` neste repositório, copie todo o conteúdo, cole no SQL Editor e clique **Run**. O script cria as tabelas, funções, políticas e bucket usados pela versão cloud.
 3. Em **Authentication → Providers**, mantenha habilitado **Email**.
-4. Em **Authentication → URL Configuration**, configure a URL publicada do MercadoFlow como **Site URL** e inclua-a na lista de **Redirect URLs**. Para desenvolvimento local, inclua também a URL local que o servidor de desenvolvimento usa.
+4. Em **Authentication → URL Configuration**, configure `https://leandrosouza13.github.io/MercadoFlow/` como **Site URL** e inclua essa mesma URL na lista de **Redirect URLs**. Para desenvolvimento local, inclua também a URL local que o servidor de desenvolvimento usa.
 5. Decida se a confirmação de e-mail ficará habilitada. Se ficar, o usuário precisará confirmar o endereço antes de entrar.
 6. Depois do primeiro deploy, abra o endereço publicado, crie a conta, confirme o e-mail se solicitado e crie o workspace. É possível escolher migrar os dados salvos neste navegador.
 
